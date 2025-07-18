@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public GameObject loseTextObject;
+    public TextMeshProUGUI winScore;
     
     private Rigidbody rb;
     private int count;
@@ -42,10 +44,12 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + count.ToString();
-        if (count >= 12) 
+        countText.text = "Score: " + count.ToString();
+        if (count >= 5) 
         {
             winTextObject.SetActive(true);
+            winScore.text = "Score: " + count.ToString();
+            gameObject.SetActive(false);
             
             Destroy(GameObject.FindGameObjectWithTag("Enemies"));
 
@@ -73,8 +77,8 @@ public class PlayerController : MonoBehaviour
             // Destroy the current object
             Destroy(gameObject); 
             // Update the winText to display "You Lose!"
-            winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            loseTextObject.gameObject.SetActive(true);
+            // loseTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
             
             // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
